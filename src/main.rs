@@ -15,12 +15,13 @@ fn main () {
     let f = add_two;
     let y = f(y);
     println!("y is equal to {}",y);
-    let myArray: [i32; 3] = [1, 2, 3];
-    println!("myArray has {} elements", myArray.len());
-    for i in 0..(myArray.len()) {
-        println!("Element in array: {}", myArray[i]);
+    let my_array: [i32; 3] = [1, 2, 3];
+    println!("my_array has {} elements", my_array.len());
+    for i in 0..(my_array.len()) {
+        println!("Element in array: {}", my_array[i]);
     }
-    
+    let slicin_str = "Slice me up!";
+    println!("All sliced {}", &slicin_str[9..11]);
 }
 /* Numeric types:
 i8 -- i stands for integer (signed)
