@@ -1,4 +1,4 @@
-   
+ 
 fn add_two(x: i32) -> i32{
     x + 2
 }
@@ -6,6 +6,7 @@ fn add_two(x: i32) -> i32{
 fn add_one(x: i32) -> i32{
     x + 1
 }
+/*
 fn main () {
     println!("hello world!");
     let mut y: i32 = 1;
@@ -28,6 +29,8 @@ fn main () {
     x.0 = y.0;
     println!("Ecce Tuple: {} {}", x.0, x.1);
 }
+ */
+
 /* Numeric types:
 i8 -- i stands for integer (signed)
 i16
@@ -40,5 +43,12 @@ u64 -- probably not supported on many systems
 isize -- pointer sized integer
 usize
 f32 -- 32 bit floating
-f34 
-*/
+f64 
+ */
+
+fn main () {
+    // if is an expression in Rust.
+    let x: i32 = 5;
+    let y:i32 = if x == 5 {10} else {15}; // if without else always returns empty tuple
+    println!("y = {}", y);
+}
