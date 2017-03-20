@@ -20,8 +20,13 @@ fn main () {
     for i in 0..(my_array.len()) {
         println!("Element in array: {}", my_array[i]);
     }
-    let slicin_str = "Slice me up!";
-    println!("All sliced {}", &slicin_str[9..11]);
+    let slicin_str: &str  = "Slice me up!";
+    println!("All sliced {}", &slicin_str[9..12]);
+    let mut x: (i32, &str) = (6, "hello!");
+    println!("Ecce Tuple: {} {}", x.0, x.1);
+    let y = (add_one(x.0), "Ah Bartleby! Ah humanity!");
+    x.0 = y.0;
+    println!("Ecce Tuple: {} {}", x.0, x.1);
 }
 /* Numeric types:
 i8 -- i stands for integer (signed)
