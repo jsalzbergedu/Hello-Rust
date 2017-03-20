@@ -15,6 +15,12 @@ fn main () {
     let f = add_two;
     let y = f(y);
     println!("y is equal to {}",y);
+    let myArray: [i32; 3] = [1, 2, 3];
+    println!("myArray has {} elements", myArray.len());
+    for i in 0..(myArray.len()) {
+        println!("Element in array: {}", myArray[i]);
+    }
+    
 }
 /* Numeric types:
 i8 -- i stands for integer (signed)
