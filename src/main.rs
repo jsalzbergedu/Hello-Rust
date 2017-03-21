@@ -173,6 +173,7 @@ fn main () {
 
 //Use references to "borrow" things for functions rather than taking ownership
 
+/*
 fn my_borrower (v_one: &Vec<i32>, v_two: &Vec<i32>) -> i32 {
     println!("First element of v_one: {}", v_one[0]);
     println!("First element of v_two: {}", v_two[0]);
@@ -186,3 +187,23 @@ fn main () {
     my_borrower(&my_vector, &my_other_vector);
     println!("And so will this: {} {}", my_vector[2], my_other_vector[2]);
 }
+ */
+
+/*
+fn main () {
+    let mut x = 5;
+    {
+        let y = &mut x; // &mut allows changing the resource being borrowed, this borrows x as an &mut
+        *y += 1; // Apparently y is an &mut so it needs a *
+    } // ends the scope of y's borrow as a mut
+    println!("Lets see what happens to x: {}", x); // This borrows x as an immutable, possible because y's mutable borrow ended
+    // As many borrows as a reference as needed, only one borrow as a mutable reference
+    // Data race impossible: only one thing can have the &mut (be writing to mem location) Neato!
+    // Moreover, any borrow has to have a smaller scope than the scope of the thing its borrowing from
+}
+ */
+
+// A function, e.g., fn bar <>(), can have generics in the <>, including lifetimes
+// The lifetime, eg 'life_time, goes inbetween the reference and the primitive type,
+// e.g., fn bar<'life_time>(i: &'life_time mut i32) or fn bar <'life_time>(i: &'life_time i32)
+// TODO come back to lifetimes when I get to structs 
