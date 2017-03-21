@@ -161,10 +161,28 @@ fn take (v: Vec<i32>) {
 }
 
 fn main () {
-    let my_vector: Vec<i32> = vec![1,2,3]; // creates Vec on stack, allocates heap space for elements
+    let my_vector: Vec<i32> = vec![1,2,3]; // creates Vec's pointers on stack, allocates heap space for elements and points pointers to heap
     let my_other_vector = my_vector;
     // println!("This won't work : {}", my_vector[0]);
     take(my_other_vector);
     println!("This wont work: {}", my_other_vector[0]);
+    // Rust only allows one pointer to one point on the heap, so vectors, being afaik an array of pointers, can't be copied
+    // Primitives OFC can be copied
 } // my_vector goes out of scope, resources are free()'d
 */
+
+//Use references to "borrow" things for functions rather than taking ownership
+
+fn my_borrower (v_one: &Vec<i32>, v_two: &Vec<i32>) -> i32 {
+    println!("First element of v_one: {}", v_one[0]);
+    println!("First element of v_two: {}", v_two[0]);
+    42
+}
+
+fn main () {
+    let my_vector: Vec<i32> = vec![0, 1, 2, 3];
+    let my_other_vector: Vec<i32> = vec![0, 1, 2, 3, 4];
+    println!("This will work: {} {}", my_vector[1], my_other_vector[2]);
+    my_borrower(&my_vector, &my_other_vector);
+    println!("And so will this: {} {}", my_vector[2], my_other_vector[2]);
+}
