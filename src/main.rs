@@ -63,6 +63,7 @@ fn main () {
 }
  */
 
+/*
 fn main () {
     let mut x: i32 = 5;
     let mut first_bool: bool = false;
@@ -73,5 +74,14 @@ fn main () {
         if x % 5 == 0 {
             first_bool = true;
         }
+    }
+}
+ */
+fn main () {
+    for (i, j) in (5..10).enumerate() {
+        println!("Are i: {} and j: {} similar to how it works in C?", i, j);
+    }
+    for (i, j) in (7..10).enumerate() {
+        println!("Parfois i: {} gets set to zero and j: {} gets set to tuple.1?", i, j);
     }
 }
