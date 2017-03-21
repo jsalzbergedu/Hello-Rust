@@ -46,9 +46,32 @@ f32 -- 32 bit floating
 f64 
  */
 
+/*
 fn main () {
     // if is an expression in Rust.
     let x: i32 = 5;
     let y:i32 = if x == 5 {10} else {15}; // if without else always returns empty tuple
     println!("y = {}", y);
+}
+ */
+
+/*
+fn main () {
+    loop {
+        println!("Looping forever sounds like a bad idea.");
+    }
+}
+ */
+
+fn main () {
+    let mut x: i32 = 5;
+    let mut first_bool: bool = false;
+    while !first_bool {
+        x += x - 3;
+        println!("{}", x);
+
+        if x % 5 == 0 {
+            first_bool = true;
+        }
+    }
 }
