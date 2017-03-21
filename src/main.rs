@@ -127,7 +127,7 @@ fn main () {
     }
 }
  */
-
+/*
 fn main () {
     let mut my_vector: Vec<i32> = vec![1, 2, 3, 4, 5]; // I store my data on the heap, but my size has to be known at compile time
     let my_other_vector = vec![0;10]; // Initializes vec with 10 elements, all 0
@@ -149,5 +149,22 @@ fn main () {
     for i in my_vector {
         println!("Elements iterated by i taking ownership of the vector and its elements: {} cannot be re-used.", i);
     }
+    // Vectors have pretty normal functions, like vector.push(element) and vector.pop()
 }
     
+ */
+
+/*
+fn take (v: Vec<i32>) {
+    //take will take ownership of a vec used as param
+    println!("I'm taking ownership of the vector that starts with {}", v[0]);
+}
+
+fn main () {
+    let my_vector: Vec<i32> = vec![1,2,3]; // creates Vec on stack, allocates heap space for elements
+    let my_other_vector = my_vector;
+    // println!("This won't work : {}", my_vector[0]);
+    take(my_other_vector);
+    println!("This wont work: {}", my_other_vector[0]);
+} // my_vector goes out of scope, resources are free()'d
+*/
