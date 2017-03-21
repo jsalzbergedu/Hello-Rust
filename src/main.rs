@@ -206,4 +206,18 @@ fn main () {
 // A function, e.g., fn bar <>(), can have generics in the <>, including lifetimes
 // The lifetime, eg 'life_time, goes inbetween the reference and the primitive type,
 // e.g., fn bar<'life_time>(i: &'life_time mut i32) or fn bar <'life_time>(i: &'life_time i32)
-// TODO come back to lifetimes when I get to structs 
+
+struct Foo <'a> {
+    x: &'a i32, // Lifetime to keep reference of Foo from outliving the things it owns
+}
+
+impl <'a> Foo <'a> {
+    fn x(&self) -> & 'a i32 { self.x } // "implementing a method on Foo" Apparently I'm giving Foo a method
+}
+
+fn main () {
+    let y = &5;
+    let f = Foo { x: y };
+    println!("{}", f.x()); // Apparently the method on foo returns its member's value
+
+}
