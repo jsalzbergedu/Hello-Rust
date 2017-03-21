@@ -177,7 +177,7 @@ fn my_borrower (v_one: &Vec<i32>, v_two: &Vec<i32>) -> i32 {
     println!("First element of v_one: {}", v_one[0]);
     println!("First element of v_two: {}", v_two[0]);
     42
-}
+} // Borrowing does not deallocate 
 
 fn main () {
     let my_vector: Vec<i32> = vec![0, 1, 2, 3];
