@@ -102,6 +102,7 @@ fn main () {
 }
  */
 
+/*
 fn main () {
     let mut x = 1;
 
@@ -116,4 +117,25 @@ fn main () {
         println!("Looping forever is a bad idea. {}", x);
         if x >= 50 {break;}
     }
+
+    'first_for: for i in (0..10) {
+        'second_for: for j in (0..10) {
+            if i % 3 == 0 {continue 'first_for;}
+            if j % 3 == 0 {continue 'second_for;}
+            println!("i: {} j: {}", i, j);
+        }
+    }
 }
+ */
+
+fn main () {
+    let my_vector: Vec<i32> = vec![1, 2, 3, 4, 5]; // I store my data on the heap, but my size has to be known at compile time
+    let my_other_vector = vec![0;10]; // Initializes vec with 10 elements, all 0
+    let i: usize = 0;
+    println!("My rust vector's first elements are {} & {}", my_vector[i], my_other_vector[i]);
+    match my_vector.get(8) {
+        Some(j) => println!("This will not run; my_vector has no eigth element"),
+        None => println!("I can go out of bounds without panicking!")
+    }
+}
+    
