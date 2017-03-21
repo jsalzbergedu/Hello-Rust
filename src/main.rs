@@ -77,11 +77,43 @@ fn main () {
     }
 }
  */
+
+/*
 fn main () {
     for (i, j) in (5..10).enumerate() {
         println!("Are i: {} and j: {} similar to how it works in C?", i, j);
     }
     for (i, j) in (7..10).enumerate() {
         println!("Parfois i: {} gets set to zero and j: {} gets set to tuple.1?", i, j);
+    }
+}
+ */
+
+/*
+fn main () {
+    let lines = "hello\nworld".lines(); // An iterator, apparently
+    for (i, j) in lines.enumerate() {
+        println!("{}:{}", i, j);
+    }
+   /*  for (i, j, y) in (5..10).enumerate() {
+        println!("So i: {} starts at zero, j: {} starts at tuple.1, and y: {} starts at ?", i, j, y);
+    } I see, this does not work. */
+        
+}
+ */
+
+fn main () {
+    let mut x = 1;
+
+    loop {
+        println!("Looping forever is a bad idea. Using continue, x = {}", x);
+        x += x;
+        if x <= 30 {continue;}
+        else {break;}
+    }
+    loop {
+        x += x;
+        println!("Looping forever is a bad idea. {}", x);
+        if x >= 50 {break;}
     }
 }
