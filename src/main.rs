@@ -129,13 +129,25 @@ fn main () {
  */
 
 fn main () {
-    let my_vector: Vec<i32> = vec![1, 2, 3, 4, 5]; // I store my data on the heap, but my size has to be known at compile time
+    let mut my_vector: Vec<i32> = vec![1, 2, 3, 4, 5]; // I store my data on the heap, but my size has to be known at compile time
     let my_other_vector = vec![0;10]; // Initializes vec with 10 elements, all 0
     let i: usize = 0;
     println!("My rust vector's first elements are {} & {}", my_vector[i], my_other_vector[i]);
     match my_vector.get(8) {
         Some(j) => println!("This will not run; my_vector has no eigth element"),
         None => println!("I can go out of bounds without panicking!")
+    }
+    
+    for i in &my_vector {
+        println!("Elements iterated using a reference: {}", i);
+    }
+
+    for i in &mut my_vector {
+        println!("Elements iterated using a mutable reference : {}", i);
+    }
+
+    for i in my_vector {
+        println!("Elements iterated by i taking ownership of the vector and its elements: {} cannot be re-used.", i);
     }
 }
     
