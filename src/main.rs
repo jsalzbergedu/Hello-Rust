@@ -318,8 +318,28 @@ enum BoardGameTurn {
     pass,
 }
 
+fn constructor_as_function_demo(x: String) -> Message {
+    Message::Write(x)
+}
+
+/*
 fn main () {
     let x: Message = Message::Move { x: 3, y: 4 };
     let y: BoardGameTurn = BoardGameTurn::Move { squares: 1};
     println!("I compile even though Move is used twice! In this line - 2 it is scoped to Message, then in this line - 1 to BoardGameTurn.");
+    let m = Message::Write("Hello World".to_string());
+    let x = constructor_as_function_demo("Hello World".to_string());
+    println!("This line -2 and this line -1 do the same thing; enum constructors can be used as functions");
+}
+ */
+
+fn main () {
+    let x: i32 = 5;
+    let number = match x {
+        1 => println!("One"),
+        3 => println!("Three"),
+        5 => println!("Five"),
+        _ => println!("*"),
+    };
+
 }
