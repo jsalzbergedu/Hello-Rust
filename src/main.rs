@@ -333,6 +333,7 @@ fn main () {
 }
  */
 
+/*
 fn main () {
     let x: i32 = 5;
     let number = match x {
@@ -342,4 +343,44 @@ fn main () {
         _ => println!("*"),
     };
 
+}
+ */
+
+/*
+fn main () {
+    let x: i32 = 1;
+    match x {
+        y => println!("x: {} y: {}", x, y), // Creates "a binding for the value in the any case" (Catch all binding)
+        // Using a _ here would break the code
+    }
+}
+ */
+
+/*
+fn main () {
+    let x = 1;
+    let c = 'c';
+    match c {
+        x => println!("x: {} c: {}", x, c), // Binds x to c, but binding goes out of scope
+    }
+    println!("x: {}", x);
+}
+ */
+
+/*
+fn main () {
+    let x: i32 = 1;
+    match x {
+        1 | 2 => println!("x == 1 || x ==2 returns true"),
+        3 => println!("Tres"),
+        _ => println!("*"),
+    }
+}
+ */
+
+fn main () {
+    let origin = Point { x: 0, y: 0 };
+    match origin {
+        Point { x, y } => println!("({},{})", x, y), // Compound data type can be destructured w/ pattern
+    }
 }
