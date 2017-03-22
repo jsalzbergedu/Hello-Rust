@@ -427,4 +427,15 @@ fn main () {
         OptionalTuple::Value(..) => println!("Got me here a tuple"),
         OptionalTuple::Missing => println!("For me there exists no tuple"),
     }
+    let my_char = '💩';
+    match my_char {
+        'a' ... 'j' => println!("This is an early letter"),
+        'k' ... 'z' => println!("This is a late letter"),
+        to_matched_bound @ _ => println!("This isn't a letter its a pile of {}", to_matched_bound),
+    }
+    let matc_me: i32 = 6;
+    match matc_me {
+        e @ 0 ... 5 | e @ 7 ... 9 => println!("Je n'ecris pas"),
+        _ => println!("Bonsoir"),
+    }
 }
