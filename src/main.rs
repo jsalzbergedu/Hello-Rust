@@ -207,6 +207,7 @@ fn main () {
 // The lifetime, eg 'life_time, goes inbetween the reference and the primitive type,
 // e.g., fn bar<'life_time>(i: &'life_time mut i32) or fn bar <'life_time>(i: &'life_time i32)
 
+/*
 struct Foo <'a> {
     x: &'a i32, // Lifetime to keep reference of Foo from outliving the things it owns
 }
@@ -220,4 +221,35 @@ fn main () {
     let f = Foo { x: y };
     println!("{}", f.x()); // Apparently the method on foo returns its member's value
 
+}
+ */
+
+/*
+struct Bar {
+    x: i32,
+    mut y: i32, // Will not work, since mut is "a property of either a borrow (&mut) or a binding (let mut)."
+}
+ */
+
+/*
+struct Point {
+    x: i32,
+    y: std::cell::Cell<i32>, // Making x immutable and y emulate mutability
+}
+
+fn main () {
+    let my_point = Point { x: 11, y: std::cell::Cell::new(3)};
+    my_point.y.set(8);
+    println!("y: {:?}", my_point.y); // Apparently :? lets you print info about an obj or something
+}
+ */
+
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main () {
+    let origin = Point { x: 0, y: 0 }; // (x,y) -> (0,0)
+    println!("The origin is at ({},{})", origin.x, origin.y);
 }
