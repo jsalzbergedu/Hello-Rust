@@ -378,9 +378,53 @@ fn main () {
 }
  */
 
+/*
 fn main () {
     let origin = Point { x: 0, y: 0 };
     match origin {
         Point { x, y } => println!("({},{})", x, y), // Compound data type can be destructured w/ pattern
+    } // Destructuring works on any compound data including tuple and enum
+    // For some godforsaken reason you may want to give the binding a different name
+    match origin {
+        Point { x: x1, y: y1} => println!("({},{})", x1, y1),
+    }
+    //And ofc you can destructure and only use one of the bindings
+    match origin {
+        Point {x, ..} => println!("x is: {}", x),
+    }
+}
+ */
+
+fn coordinate() -> (i32, i32, i32) {
+    (0, 0, 0)
+}
+
+/*
+fn main () {
+    let (x, _, z) = coordinate(); // _ is ignored, never binds a value
+    println!("{}", x);
+    println!("{}", z);
+    let _ = String::from("  hello  ").trim(); // Function runs, string is created, string is dropped b/c its not bound to anything
+}
+ */
+
+enum OptionalTuple {
+    Value(i32, i32, i32),
+    Missing,
+}
+
+fn main () {
+    let x = OptionalTuple::Value(1, 2, 3);
+    let matc_for_rf = 5;
+    match matc_for_rf {
+        ref r => println!("Got me here a reference! {}", r), // "Creates a reference for use in the pattern"
+    }
+    let mut matc_for_mu_rf = 5;
+    match matc_for_mu_rf {
+        ref mut mr => println!("Got me here a mutable reference! {}", mr),
+    }
+    match x {
+        OptionalTuple::Value(..) => println!("Got me here a tuple"),
+        OptionalTuple::Missing => println!("For me there exists no tuple"),
     }
 }
