@@ -244,12 +244,41 @@ fn main () {
 }
  */
 
+
 struct Point {
     x: i32,
     y: i32,
 }
 
+/*
 fn main () {
     let origin = Point { x: 0, y: 0 }; // (x,y) -> (0,0)
     println!("The origin is at ({},{})", origin.x, origin.y);
+}
+ */
+
+/*
+fn main () {
+    let mut point = Point {x: 0, y: 0}; // "Temporarily" makes point mutable
+    point.x = 5;
+    println!("The point is now ({},{})", point.x, point.y);
+    let point = point; // Point is no longer mut for some unexplained reason. Possibly point is now owned by point?
+    println!("The point is now ({},{})", point.x, point.y);
+    // point.y = 6; -- this would cause an error
+}
+ */
+
+struct PointRef <'a> {
+    x: &'a mut i32,
+    y: &'a mut i32,
+}
+
+fn main () {
+    let mut point = Point { x: 0, y: 0 };
+    {
+        let r = PointRef{ x: &mut point.x, y: &mut point.y };
+        *r.x = 5;
+        *r.y = 6;
+    }
+    println!("(x,y) is ({},{})", point.x, point.y);
 }
