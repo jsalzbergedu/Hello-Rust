@@ -268,17 +268,35 @@ fn main () {
 }
  */
 
+
 struct PointRef <'a> {
     x: &'a mut i32,
     y: &'a mut i32,
 }
 
+/*
 fn main () {
     let mut point = Point { x: 0, y: 0 };
     {
-        let r = PointRef{ x: &mut point.x, y: &mut point.y };
-        *r.x = 5;
-        *r.y = 6;
-    }
+        let r = PointRef{ x: &mut point.x, y: &mut point.y }; //---+ r borrows point with mutable referene
+        *r.x = 5;                                             //---|
+        *r.y = 6;                                             //---|
+    }                                                         //---+ r goes out of scope, along with its borrow, point's x and y now point to (5,6)
     println!("(x,y) is ({},{})", point.x, point.y);
+}
+ */
+
+struct Point3D {
+    x: i32,
+    y: i32,
+    z: i32,
+}
+
+fn main () {
+    let mut point = Point3D { x: 0, y: 0, z: 0 };
+    point = Point3D { x: 1, .. point } ; // "Update syntax"
+    println!("({},{},{})", point.x, point.y, point.z);
+    let origin = Point3D { x: 0, y: 0, z: 0 };
+    point = Point3D { z: 5, .. origin};
+    println!("({},{},{})", point.x, point.y, point.z);
 }
