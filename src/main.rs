@@ -292,6 +292,7 @@ struct Point3D {
     z: i32,
 }
 
+/*
 fn main () {
     let mut point = Point3D { x: 0, y: 0, z: 0 };
     point = Point3D { x: 1, .. point } ; // "Update syntax"
@@ -299,4 +300,26 @@ fn main () {
     let origin = Point3D { x: 0, y: 0, z: 0 };
     point = Point3D { z: 5, .. origin};
     println!("({},{},{})", point.x, point.y, point.z);
+}
+ */
+
+struct IAmEmpty; // Empty struct, can be used to take on traits
+// Rust's enums are pretty cool:
+
+enum Message {
+    Quit,
+    ChangeColor (i32, i32, i32),
+    Move { x: i32, y: i32 },
+    Write(String),
+}
+
+enum BoardGameTurn {
+    Move { squares: i32 },
+    pass,
+}
+
+fn main () {
+    let x: Message = Message::Move { x: 3, y: 4 };
+    let y: BoardGameTurn = BoardGameTurn::Move { squares: 1};
+    println!("I compile even though Move is used twice! In this line - 2 it is scoped to Message, then in this line - 1 to BoardGameTurn.");
 }
