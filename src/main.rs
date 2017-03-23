@@ -111,7 +111,7 @@ fn main () {
         x += x;
         if x <= 30 {continue;}
         else {break;}
-    }
+nn    }
     loop {
         x += x;
         println!("Looping forever is a bad idea. {}", x);
@@ -485,12 +485,13 @@ impl Circle {
     fn takeing_ownership(self) {
         println!("I'm not borrowing myself, this is very rude");
     }
-    
+
+    /*
     fn area(&self) -> f64 {
         let pi: f64 = std::f64::consts::PI;
         pi * (self.radius * self.radius)
     }
-    
+     */
     fn grow(&self, increment: f64) -> Circle {
         Circle { x: self.x, y: self.y, radius: self.radius + increment }
     }
@@ -552,6 +553,7 @@ fn takes_me_a_slice (slice: &str) {
     println!("Gots me a slice: {}", slice);
 }
 
+/*
 fn main () {
     let my_string_cheese = "foo
     bar";
@@ -583,4 +585,70 @@ fn main () {
     let le_monde = "Le Monde".to_string();
     let bonjour_le_monde = bonjour + &le_monde;
     println!("{}", bonjour_le_monde);
+}
+ */
+
+// In rust's standard library:
+/*
+enum Option<T> {
+    Some<T>,
+    None,
+}
+ */
+
+// Generics
+enum DoodleBop <T, A> {
+    DingleHopper(T),
+    Fleeb(A),
+}
+
+fn takes_anything<T, B>(x: T, y: B) {
+    //Things and stuff
+}
+
+struct GenericPoint<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> GenericPoint<T> {
+    fn flurbo() {
+        println!("I work!");
+    }
+}
+
+/*
+fn main() {
+    println!("This does compile?");
+    let int_origin = GenericPoint { x: 0, y: 0, };
+    let float_origin = GenericPoint { x: 0.0, y: 0.0, };
+}
+ */
+
+// Sweet! I've gotten to traits!
+
+trait HasArea {
+    fn area(&self) -> f64;
+    fn is_larger(&self, &Self) -> bool;
+}
+
+impl HasArea for Circle {
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+
+    fn is_larger(&self, other: &Self) -> bool {
+        self.area() > other.area()
+    }
+}
+
+fn print_area<T: HasArea>(shape: T) {
+    println!("Got a shape with area {} ", shape.area());
+}
+
+fn main () {
+    let my_circ_one = Circle { x: 0.0, y: 0.0, radius: 1.0, };
+    let my_circ_two = Circle { x: 0.0, y: 0.0, radius: 3.0 };
+    print_area(my_circ_one);
+    print_area(my_circ_two);
 }
