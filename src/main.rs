@@ -477,29 +477,69 @@ impl Circle {
     fn immutable_reference(&self) {
         println!("Taking myself by immutable reference!");
     }
+    
     fn mutable_reference(&mut self) {
         println!("Taking self by mutable reference - this isn't very nice");
     }
+    
     fn takeing_ownership(self) {
         println!("I'm not borrowing myself, this is very rude");
     }
+    
     fn area(&self) -> f64 {
         let pi: f64 = std::f64::consts::PI;
         pi * (self.radius * self.radius)
     }
+    
     fn grow(&self, increment: f64) -> Circle {
         Circle { x: self.x, y: self.y, radius: self.radius + increment }
     }
+    
     // Associated functions / static methods:
     fn new(x: f64, y: f64, radius: f64) -> Circle {
         Circle { x: x, y: y, radius: radius, }
     }
 }
 
+struct CircleBuilder {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+impl CircleBuilder {
+    fn new() -> CircleBuilder {
+        CircleBuilder { x: 0.0, y: 0.0, radius: 1.0, }
+    }
+    
+    fn set_x(&mut self, coord: f64) -> &mut CircleBuilder {
+        self.x = coord;
+        self
+    }
+    
+    fn set_y(&mut self, coord: f64) -> &mut CircleBuilder {
+        self.y = coord;
+        self
+    }
+
+    fn set_radius(&mut self, coord: f64) -> &mut CircleBuilder {
+        self.radius = coord;
+        self
+    }
+
+    fn finalize(&self) -> Circle {
+        Circle { x: self.x, y: self.y, radius: self.radius, }
+    }
+
+}
+
 fn main() {
-    let my_circle = Circle { x: 0.0, y: 0.0, radius: 2.0 };
+    let my_circle = Circle { x: 0.0, y: 0.0, radius: 2.0, };
     println!("My circle's area is: {}", my_circle.area());
     let my_bigger_circle_area = my_circle.grow(2.0).area();
     println!("My bigger circle's area is: {}", my_bigger_circle_area);
     println!("The circle made by a static function's area is: {}", Circle::new(0.0, 0.0, 5.0).grow(2.0).area()); // I().think().I().get().where().this().is().going
+    let a_builder_built_this = CircleBuilder::new().set_x(0.0).set_y(0.0).set_radius(5.0).finalize();
+    println!("A builder (A lot like a constructor) this circle:");
+    println!("X coordinate: {}, Y coordinate: {}, Radius: {}", a_builder_built_this.x, a_builder_built_this.y, a_builder_built_this.radius);
 }
