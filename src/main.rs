@@ -568,4 +568,10 @@ fn main () {
     cheese_splinter.push_str(", bien sur");
     takes_me_a_slice(&cheese_splinter);
     // If you are using a function that takes one of &str's traits, you must convert a String using &*
+    // UTF-8 Strings cannot be indexed; bytes > chars. But you can do this:
+    let hachiko = "忠犬ハチ公";
+    for amt_of_chars in hachiko.chars() {
+        println!("{}", amt_of_chars);
+    }
+    println!("First char of hachiko: {:?}", hachiko.chars().nth(0));
 }
