@@ -48,13 +48,37 @@ fn main () {
 
  */
 
-struct DootDoot;
 
 // Default method when you know how the other will be implemented:
 trait Foo {
     fn is_valid(&self) -> bool;
-    fn is_invalid(&self) -> bool { !self.is_valid() };
+    fn is_invalid(&self) -> bool { !self.is_valid() }
 }
 
+struct DootDoot;
+
+impl Foo for DootDoot {
+    fn is_valid(&self) -> bool {
+        println!("Called is_valid()");
+        true
+    }
+}
 // Overrides:
 struct DootDootFooOverridden;
+
+impl Foo for DootDootFooOverridden {
+    fn is_valid(&self) -> bool {
+        println!("Called is_valid!");
+        true
+    }
+    fn is_invalid(&self) -> bool {
+        println!("Called is_invalid!");
+        true
+    }
+}
+
+fn main() {
+    let (instance_one, instance_two) = (DootDoot, DootDootFooOverridden);
+    instance_one.is_invalid();
+    instance_two.is_invalid();
+}
