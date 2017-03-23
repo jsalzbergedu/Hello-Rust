@@ -50,6 +50,7 @@ fn main () {
 
 
 // Default method when you know how the other will be implemented:
+/*
 trait Foo {
     fn is_valid(&self) -> bool;
     fn is_invalid(&self) -> bool { !self.is_valid() }
@@ -76,9 +77,43 @@ impl Foo for DootDootFooOverridden {
         true
     }
 }
+ */
 
+
+/*
 fn main() {
     let (instance_one, instance_two) = (DootDoot, DootDootFooOverridden);
     instance_one.is_invalid();
     instance_two.is_invalid();
+}
+ */
+
+// Inheritance:
+
+trait Foo {
+    fn foo(&self);
+}
+
+trait InheritsFromFoo : Foo {
+    fn foobar(&self);
+}
+
+struct Baz;
+
+impl Foo for Baz {
+    fn foo(&self) {
+        println!("foo");
+    }
+}
+
+impl InheritsFromFoo for Baz {
+    fn foobar(&self) {
+        println!("foobar");
+    }
+}
+
+fn main () {
+    let my_instance = Baz { };
+    my_instance.foo();
+    my_instance.foobar();
 }
