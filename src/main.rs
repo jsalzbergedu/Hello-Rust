@@ -90,6 +90,7 @@ fn main() {
 
 // Inheritance:
 
+/*
 trait Foo {
     fn foo(&self);
 }
@@ -116,4 +117,48 @@ fn main () {
     let my_instance = Baz { };
     my_instance.foo();
     my_instance.foobar();
+}
+*/
+    
+// The following can be derived:
+// Debug, Clone, Copy, Default, Eq, Hash, Ord, PartialEq, PartialOrd
+// As follows:
+/* #[derive(Debug)]
+   struct Foo
+ */
+// The above automatically implements the traits!
+
+/*
+struct HasDrop;
+
+impl Drop for HasDrop {
+    fn drop (&mut self) {
+        println!("Drop lets me run code when a value goes out of scope!"); // Like a *cough* destructor *cough*
+    }
+}
+
+fn main() {
+    let x = HasDrop;
+    println!("Example code.");
+} // Drop runs
+ */
+
+struct LastIn;
+struct FirstOut;
+
+impl Drop for LastIn {
+    fn drop (&mut self) {
+        print!("\nLast in");
+    }
+}
+
+impl Drop for FirstOut {
+    fn drop (&mut self) {
+        print!(", first out\n");
+    }
+}
+
+fn main() {
+    let first_declared_instance = FirstOut;
+    let second_declared_instance = LastIn;
 }
