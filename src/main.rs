@@ -533,6 +533,7 @@ impl CircleBuilder {
 
 }
 
+/*
 fn main() {
     let my_circle = Circle { x: 0.0, y: 0.0, radius: 2.0, };
     println!("My circle's area is: {}", my_circle.area());
@@ -542,4 +543,29 @@ fn main() {
     let a_builder_built_this = CircleBuilder::new().set_x(0.0).set_y(0.0).set_radius(5.0).finalize();
     println!("A builder (A lot like a constructor) this circle:");
     println!("X coordinate: {}, Y coordinate: {}, Radius: {}", a_builder_built_this.x, a_builder_built_this.y, a_builder_built_this.radius);
+}
+ */
+
+// Time for some strings
+
+fn takes_me_a_slice (slice: &str) {
+    println!("Gots me a slice: {}", slice);
+}
+
+fn main () {
+    let my_string_cheese = "foo
+    bar";
+    if my_string_cheese == "foo\n    bar" {
+        println!("Very good!");
+    }
+    let cheese_strand = "foo\
+                         bar";
+    if cheese_strand == "foobar" {
+        println!("Tres bien!");
+    }
+    // You can create Strings on heap by converting a string slice to_string()
+    let mut cheese_splinter = "Je suis le fromage".to_string(); // Careful now - allocating heap is expensive, but turning String into &str is not
+    cheese_splinter.push_str(", bien sur");
+    takes_me_a_slice(&cheese_splinter);
+    // If you are using a function that takes one of &str's traits, you must convert a String using &*
 }
