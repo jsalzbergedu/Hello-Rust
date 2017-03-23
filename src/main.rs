@@ -413,6 +413,7 @@ enum OptionalTuple {
     Missing,
 }
 
+/*
 fn main () {
     let x = OptionalTuple::Value(1, 2, 3);
     let matc_for_rf = 5;
@@ -437,5 +438,25 @@ fn main () {
     match matc_me {
         e @ 0 ... 5 | e @ 7 ... 9 => println!("Je n'ecris pas"),
         _ => println!("Bonsoir"),
+    }
+}
+ */
+
+enum OptionalInt {
+    Value(i32),
+    Missing,
+}
+
+fn main () {
+    let x = OptionalInt::Value(8);
+    match x {
+        OptionalInt::Value(i) if i > 5 => println!("Got an int larger than five!"),
+        OptionalInt::Value(..) => println!("Got an int!"),
+        OptionalInt::Missing => println!("I don't recall saying good luck"),
+    }
+    let y = false;
+    match x {
+        OptionalInt::Value(8) | OptionalInt::Value(9) if y => println!("bien sur"), // if y for both OptInt::V(8) and OptInt::V(9)
+        _ => println!("non"),
     }
 }
