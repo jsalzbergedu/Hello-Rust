@@ -490,6 +490,10 @@ impl Circle {
     fn grow(&self, increment: f64) -> Circle {
         Circle { x: self.x, y: self.y, radius: self.radius + increment }
     }
+    // Associated functions / static methods:
+    fn new(x: f64, y: f64, radius: f64) -> Circle {
+        Circle { x: x, y: y, radius: radius, }
+    }
 }
 
 fn main() {
@@ -497,4 +501,5 @@ fn main() {
     println!("My circle's area is: {}", my_circle.area());
     let my_bigger_circle_area = my_circle.grow(2.0).area();
     println!("My bigger circle's area is: {}", my_bigger_circle_area);
+    println!("The circle made by a static function's area is: {}", Circle::new(0.0, 0.0, 5.0).grow(2.0).area()); // I().think().I().get().where().this().is().going
 }
