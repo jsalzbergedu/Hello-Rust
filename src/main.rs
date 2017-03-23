@@ -574,4 +574,13 @@ fn main () {
         println!("{}", amt_of_chars);
     }
     println!("First char of hachiko: {:?}", hachiko.chars().nth(0));
+    //Concatenation:
+    let hello = "Hello ".to_string();
+    let world = "World"; // &str
+    let hello_world = hello + world;
+    println!("{}", hello_world);
+    let bonjour = "Bonjour ".to_string();
+    let le_monde = "Le Monde".to_string();
+    let bonjour_le_monde = bonjour + &le_monde;
+    println!("{}", bonjour_le_monde);
 }
