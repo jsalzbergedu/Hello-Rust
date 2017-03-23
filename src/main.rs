@@ -447,6 +447,7 @@ enum OptionalInt {
     Missing,
 }
 
+/*
 fn main () {
     let x = OptionalInt::Value(8);
     match x {
@@ -459,4 +460,41 @@ fn main () {
         OptionalInt::Value(8) | OptionalInt::Value(9) if y => println!("bien sur"), // if y for both OptInt::V(8) and OptInt::V(9)
         _ => println!("non"),
     }
+}
+ */
+
+// On to method syntax
+// I don't actually think baz(bar(foo)) is that confusing
+// But rust has a circumlocution that I suppose they find ergonomic
+
+struct Circle {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+impl Circle {
+    fn immutable_reference(&self) {
+        println!("Taking myself by immutable reference!");
+    }
+    fn mutable_reference(&mut self) {
+        println!("Taking self by mutable reference - this isn't very nice");
+    }
+    fn takeing_ownership(self) {
+        println!("I'm not borrowing myself, this is very rude");
+    }
+    fn area(&self) -> f64 {
+        let pi: f64 = std::f64::consts::PI;
+        pi * (self.radius * self.radius)
+    }
+    fn grow(&self, increment: f64) -> Circle {
+        Circle { x: self.x, y: self.y, radius: self.radius + increment }
+    }
+}
+
+fn main() {
+    let my_circle = Circle { x: 0.0, y: 0.0, radius: 2.0 };
+    println!("My circle's area is: {}", my_circle.area());
+    let my_bigger_circle_area = my_circle.grow(2.0).area();
+    println!("My bigger circle's area is: {}", my_bigger_circle_area);
 }
