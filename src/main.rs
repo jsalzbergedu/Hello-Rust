@@ -1,33 +1,14 @@
-// Universal function call syntax: this should be a quick one:
+// Skipping (gasp) crates because I already have to use them elsewhere
 
-trait Foo {
-    fn f(&self);
-}
+// const and static: this should be quick
 
-trait Bar {
-    fn f(&self);
-}
-
-struct Baz;
-
-impl Foo for Baz {
-    fn f(&self) {
-        println!("I am Baz' implementation of Foo");
-    }
-}
-
-impl Bar for Baz {
-    fn f(&self) {
-        println!("I am Baz' implementation of Bar");
-    }
-}
+static mut JE_SUIS_MONDIAL: i32 = 10;
 
 fn main() {
-    let my_struct = Baz;
-    // my_struct.f() is not an option b/c it would be ambiguous
-    Foo::f(&my_struct); // However you can call them this way
-    Bar::f(&my_struct);
-    // Or this way
-    <Baz as Foo>::f(&my_struct); // Calls the trait's method, not the method of the inherent one *cough* the instance *cough*
-    <Baz as Bar>::f(&my_struct);
+    const ABACKDEE: i32 = 4;
+    println!("I am inlined wherever I'm found: {}", ABACKDEE);
+    unsafe {
+        JE_SUIS_MONDIAL += JE_SUIS_MONDIAL;
+        println!("Modifying static mut s is not safe (bad): {}", JE_SUIS_MONDIAL);
+    }
 }
