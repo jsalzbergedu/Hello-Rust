@@ -2,3 +2,7 @@
 name = "hello_world"
 version = "0.0.1"
 authors = ["Jacob Salzberg <jsalzbergedu@yahoo,com>"]
+
+[dependencies.gtk]
+version = "0.1.2"
+features = ["v3_10"]
