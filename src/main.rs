@@ -30,4 +30,11 @@ fn not_main () {
 
 fn main() {
     println!("Another one of interest is should_panic, which inverts the sucess condition.");
+    // These are some really short chapters, so I'll play with aliases here too.
+    type number = i32;
+    let x: number = 5;
+    let y: number = 5;
+    if x == y {
+        println!("Aliases are just cut&paste for types");
+    }
 }
