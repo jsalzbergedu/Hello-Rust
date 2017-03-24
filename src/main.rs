@@ -1,45 +1,43 @@
-trait Foo {
-    fn method(&self) -> String;
-    
+// Closures
+fn call_with_closure<F>(some_closure: F) -> i32
+    where F: Fn(i32) -> i32 {
+    some_closure(1)
 }
 
-impl Foo for u8 {
-    fn method(&self) -> String { format!("u8: {}", *self) }
 
-}
-
-impl Foo for String {
-    fn method(&self) -> String { format!("String: {}", *self) }
-
-}
-
-// Static dispatch (No overhead abstraction, 'monomorphization,' i.e., rust optimizer creates seperate functions for u8 and String
-
-fn do_something(x: &Foo) {
-    x.method();
-}
-
-/*
 fn main() {
-    let x = 2u8;
-    let y = "Bonjour".to_string();
-    println!("This is static dispatch: {:?}", do_something(x));
-    println!("And so is this: {:?}", do_something(y));
+    let plus_one = |x: i32| x + 1; // | are pipes, through which the arguments of the closure go
+    if plus_one(1) == 2 {
+        println!("Tres bien!");
+    }
+    // {} is an expression, so closures can be multi-line
+    let plus_two = |x: i32| {
+        x + 2
+    };
+    let plus_three = |x: i32| {
+        let mut y: i32 = x;
+        y += 3;
+        y
+    };
+    if plus_three(plus_two(1)) == 6 {
+        println!("Very good!");
+    }
+
+    let mut num: i32 = 6;
+    {
+        let plus_num = |x: i32| x + num; // Borrows 'num' as a mutable
+    }
+    // let y = &mut num; // Works because plus_num went out of scope
+    // Closures copy, to take ownership of a copy, use 'move'
+    {
+        let mut add_num = move |x: i32| num += x;
+        add_num(5);
+    }
+    
+    if num == 6 {
+        println!("Very nice!");
+    }
+
+    let answer = call_with_closure(|x: i32| x + 23);
+    println!("This answer is the result of a function that takes a closure {}", answer);
 }
- */
-
-// And now on to dynamic dispatch
-// Trait objects, e.g., &Foo or Box<Foo>, store a value of any type that implements a given trait,
-// allowing the actual type to be used at runtime.
-// They can be used by casting or coercing, e.g., &x as &Foo or using &x as a function with the
-// parameter &Foo
-
-fn main () {
-    let x = 5u8;
-    println!("This uses dynamic dispatch (type casting): {:?}", do_something(&x as &Foo));
-    println!("And so does this (coercion): {:?}", do_something(&x));
-}
-
-// One cannot use trait objects for things that use Self or have type parameters, e.g.,
-// let this_will_not_work = &v as &Clone
-// Because it is not "Object safe."
