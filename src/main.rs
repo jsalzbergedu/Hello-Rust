@@ -39,3 +39,7 @@ fn main () {
     println!("This uses dynamic dispatch (type casting): {:?}", do_something(&x as &Foo));
     println!("And so does this (coercion): {:?}", do_something(&x));
 }
+
+// One cannot use trait objects for things that use Self or have type parameters, e.g.,
+// let this_will_not_work = &v as &Clone
+// Because it is not "Object safe."
