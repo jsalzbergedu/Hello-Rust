@@ -143,6 +143,7 @@ fn main() {
 } // Drop runs
  */
 
+/*
 struct LastIn;
 struct FirstOut;
 
@@ -161,4 +162,31 @@ impl Drop for FirstOut {
 fn main() {
     let first_declared_instance = FirstOut;
     let second_declared_instance = LastIn;
+}
+ */
+
+// if let
+
+fn foo(x: i32) {
+    println!("Foo was called with param: {}", x);
+}
+
+fn main() {
+    let mut x: i32 = 5;
+    // Ugly ways to see if x is five then call foo(x), esp if you have to unwrap x
+
+    match x {
+        5 => foo(x),
+        1 => println!("One"),
+        _ => println!("Not five nor one"),
+    }
+
+    if x == 5 {
+        foo(x);
+    }
+
+/*    if let x = 6 {
+        foo(x);
+    } // This is incorrect, but if x was wrapped in option, it would work as in if let Some(x) = option
+*/
 }
