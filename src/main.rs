@@ -34,6 +34,7 @@ fn extension(file_name: &str) -> Option<&str> {
 }
  */ // Doesn't work for case analysis, map is always with some
 
+/*
 fn main() {
     let file_name = "foobarbaz.rs";
     match find (file_name, '.') {
@@ -51,5 +52,24 @@ fn main() {
         None => println!("None"),
     }
      */
-    
+    println!("File extension: {}", extension_explicit(file_name).unwrap_or("None found"));
+    println!("File extension of dooblebop: {} ", extension_explicit("dooblebop").unwrap_or("None found"))
+}
+ */
+
+use::std::num::ParseIntError;
+
+fn add_one_to_number_str(input: &str) -> Result<i32, ParseIntError> {
+    match input.parse::<i32>() {
+        Ok(i) => Ok(i + 1),
+        Err(err) => Err(err),
+    }
+}
+
+fn main() {
+    let x = "6";
+    match add_one_to_number_str(x) {
+        Ok(j) => println!("Six plus one is: {}", j),
+        Err(err) => println!("Error: {}", err),
+    }
 }
